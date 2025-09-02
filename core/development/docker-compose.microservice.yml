@@ -1,0 +1,181 @@
+version: '3.8'
+
+services:
+  dev-organizationadmin-service:
+    build:
+      context: ../../../core/organizationadmin-service
+      dockerfile: Dockerfile
+      args:
+        NODE_ENV: development
+    container_name: dev-organizationadmin-service
+    ports:
+      - "3003:8003"
+    volumes:
+      - ../../../core/organizationadmin-service:/app
+      - /app/node_modules
+    env_file:
+      - ../../../core/organizationadmin-service/.env.development
+    environment:
+      PORT: 8003
+      NODE_ENV: development
+    depends_on:
+      - dev-redis
+      - dev-rabbitmq
+      - dev-mongodb
+    networks:
+      - fieldiva-development-network
+    restart: unless-stopped
+
+  dev-fielduser-service:
+    build:
+      context: ../../../core/fielduser-service
+      dockerfile: Dockerfile
+      args:
+        NODE_ENV: development
+    container_name: dev-fielduser-service
+    ports:
+      - "3004:8004"
+    volumes:
+      - ../../../core/fielduser-service:/app
+      - /app/node_modules
+    env_file:
+      - ../../../core/fielduser-service/.env.development
+    environment:
+      PORT: 8004
+      NODE_ENV: development
+    depends_on:
+      - dev-redis
+      - dev-rabbitmq
+      - dev-mongodb
+    networks:
+      - fieldiva-development-network
+    restart: unless-stopped
+
+  dev-admin-service:
+    build:
+      context: ../../../core/admin-service
+      dockerfile: Dockerfile
+      args:
+        NODE_ENV: development
+    container_name: dev-admin-service
+    ports:
+      - "3005:8005"
+    volumes:
+      - ../../../core/admin-service:/app
+      - /app/node_modules
+    env_file:
+      - ../../../core/admin-service/.env.development
+    environment:
+      PORT: 8005
+      NODE_ENV: development
+    depends_on:
+      - dev-redis
+      - dev-rabbitmq
+      - dev-mongodb
+    networks:
+      - fieldiva-development-network
+    restart: unless-stopped
+
+  dev-form-service:
+    build:
+      context: ../../../core/form-service
+      dockerfile: Dockerfile
+      args:
+        NODE_ENV: development
+    container_name: dev-form-service
+    ports:
+      - "3006:8006"
+    volumes:
+      - ../../../core/form-service:/app
+      - /app/node_modules
+    env_file:
+      - ../../../core/form-service/.env.development
+    environment:
+      PORT: 8006
+      NODE_ENV: development
+    depends_on:
+      - dev-redis
+      - dev-rabbitmq
+      - dev-mongodb
+    networks:
+      - fieldiva-development-network
+    restart: unless-stopped
+
+  dev-media-service:
+    build:
+      context: ../../../core/media-service
+      dockerfile: Dockerfile
+      args:
+        NODE_ENV: development
+    container_name: dev-media-service
+    ports:
+      - "3007:8007"
+    volumes:
+      - ../../../core/media-service:/app
+      - /app/node_modules
+    env_file:
+      - ../../../core/media-service/.env.development
+    environment:
+      PORT: 8007
+      NODE_ENV: development
+    depends_on:
+      - dev-redis
+      - dev-rabbitmq
+      - dev-mongodb
+    networks:
+      - fieldiva-development-network
+    restart: unless-stopped
+
+  dev-live-location-service:
+    build:
+      context: ../../../core/live-location-service
+      dockerfile: Dockerfile
+      args:
+        NODE_ENV: development
+    container_name: dev-live-location-service
+    ports:
+      - "3008:8008"
+    volumes:
+      - ../../../core/live-location-service:/app
+      - /app/node_modules
+    env_file:
+      - ../../../core/live-location-service/.env.development
+    environment:
+      PORT: 8008
+      NODE_ENV: development
+    depends_on:
+      - dev-redis
+      - dev-rabbitmq
+      - dev-mongodb
+    networks:
+      - fieldiva-development-network
+    restart: unless-stopped
+
+  dev-notification-service:
+    build:
+      context: ../../../core/notification-service
+      dockerfile: Dockerfile
+      args:
+        NODE_ENV: development
+    container_name: dev-notification-service
+    ports:
+      - "3009:8009"
+    volumes:
+      - ../../../core/notification-service:/app
+      - /app/node_modules
+    env_file:
+      - ../../../core/notification-service/.env.development
+    environment:
+      PORT: 8009
+      NODE_ENV: development
+    depends_on:
+      - dev-redis
+      - dev-rabbitmq
+      - dev-mongodb
+    networks:
+      - fieldiva-development-network
+    restart: unless-stopped
+
+networks:
+  fieldiva-development-network:
+    external: true
